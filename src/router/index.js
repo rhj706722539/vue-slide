@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import App from '@/App'
 import List from '@/components/list'
 import Page from '@/components/page'
 
@@ -19,13 +20,20 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'List',
-      component: List
-    },
-    {
-      path: '/page',
-      name: 'Page',
-      component: Page
-    },
+      name: 'App',
+      component: App,
+      children:[
+        {
+          path: '/list',
+          name: 'List',
+          component: List
+        },
+        {
+          path: '/page',
+          name: 'Page',
+          component: Page
+        }
+      ]
+    }
   ]
 })

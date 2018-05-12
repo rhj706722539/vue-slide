@@ -20,15 +20,15 @@ export default {
   computed:{
       thisColor(){
         if(this.colorId == '0'){
-        return '#0097E0'; 
+            return '#0097E0'; 
         }else if(this.colorId == '1'){
-        return '#3EDD92';
+            return '#3EDD92';
         }else if(this.colorId == '2'){
-        return '#F8931D';
+            return '#F8931D';
         }else if(this.colorId == '3'){
-        return '#F75353';
+            return '#F75353';
         }else if(this.colorId == '4'){
-        return '#C96BBF';
+            return '#C96BBF';
         }
     }
   },

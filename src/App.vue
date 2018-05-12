@@ -16,8 +16,7 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     // 如果isBack为true时，证明是用户点击了回退，执行slide-right动画
-    let isBack = this.$router.isBack
-    console.log(isBack);
+    let isBack = this.$router.isBack;
     if (isBack) {
       this.transitionName = 'slide-right'
     } else {
