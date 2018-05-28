@@ -3,7 +3,7 @@
       <header class="header">
           <span>我的列表</span>
       </header>
-      <div class="main">
+      <div class="main" ref="wrap" :style="{ height: wrapHeight + 'px' }">
           <ul>
               <li v-for="(item,index) in dataList" :key="index">
                   <div class="list-content" @click="goDetail(index)">
@@ -21,17 +21,52 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapState, mapMutations, mapActions } from 'vuex'
+
 export default {
   name:'List',
+  computed:{
+      ...mapState({
+
+      })
+  },
   data() {
     return {
-        dataList:['测试列表01','测试列表02','测试列表03','测试列表04','测试列表05']
+        wrapHeight:0,
+        dataList:  ['测试列表01','测试列表02','测试列表03','测试列表04','测试列表05',
+                    '测试列表06','测试列表07','测试列表08','测试列表09','测试列表10',
+                    '测试列表11','测试列表12','测试列表13','测试列表14','测试列表15',
+                    '测试列表16','测试列表17','测试列表18','测试列表19','测试列表20',
+                    '测试列表21','测试列表22','测试列表23','测试列表24','测试列表25',
+                    '测试列表26','测试列表27','测试列表28','测试列表29','测试列表30']
     }
   },
+  beforeRouteLeave(to, from, next){
+    let position = this.$refs.wrap.scrollTop;
+    this.$store.commit('SAVE_POSITION', position);
+    console.log("beforeRouteLeave"+position);
+    next()
+  },
+  updated(){
+    this.$nextTick(function(){
+      let position = this.$store.state.position;
+      this.$refs.wrap.scrollTop = position;
+      console.log("updated" + position);
+    }) 
+  },
   methods: {
-      goDetail(i){
-          this.$router.push({name:'Page',params:{index:i}});
-      }
+    ...mapMutations([
+    
+    ]),
+    ...mapActions([
+    
+    ]),
+    goDetail(i){
+        this.$router.push({name:'Page',params:{index:i}});
+    }
+  },
+  mounted () {
+      this.wrapHeight = document.documentElement.clientHeight - this.$refs.wrap.getBoundingClientRect().top - 10;
   }
 }
 </script>
@@ -49,7 +84,7 @@ export default {
 .main {
     overflow: scroll;
     height: 25rem;
-    margin-top: .4rem;
+    padding-top: .4rem;
 }
 .main ul li {
     margin: 0;
